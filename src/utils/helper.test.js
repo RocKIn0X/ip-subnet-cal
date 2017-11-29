@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { plus, convertToSubnet, convertBinaryToSubnet, ipToBroadcastAddress, ipToUsableAddressRange, networkClassSplit, ipToNetworkAddress, subnumToTotalNumberOfHosts } from './helper';
+import { plus, convertToSubnet, convertBinaryToSubnet, ipToBroadcastAddress, ipToUsableAddressRange, networkClassSplit, ipToNetworkAddress, subnumToTotalNumberOfHosts, subnumToUsableHosts, convertToWildcard, convertToBinarySubnet } from './helper';
 
 describe('test plus', () => {
   it('should plus number', () => {
@@ -72,5 +72,44 @@ describe('test subnet number to total number of hosts', () => {
     expect(subnumToTotalNumberOfHosts(14)).to.equal(262144);
     expect(subnumToTotalNumberOfHosts(28)).to.equal(16);
     expect(subnumToTotalNumberOfHosts(9)).to.equal(8388608);
+  })
+})
+
+describe('test number of usable hosts', () => {
+  it('should show number of usable hosts', () => {
+    expect(subnumToUsableHosts(24)).to.equal(254);
+    expect(subnumToUsableHosts(3)).to.equal(536870910);
+    expect(subnumToUsableHosts(14)).to.equal(262142);
+    expect(subnumToUsableHosts(28)).to.equal(14);
+    expect(subnumToUsableHosts(9)).to.equal(8388606);
+  })
+})
+
+describe('test subnet mask', () => {
+  it('should show subnet mask', () => {
+    expect(convertToSubnet(9)).to.equal('255.128.0.0');
+    expect(convertToSubnet(12)).to.equal('255.240.0.0');
+    expect(convertToSubnet(19)).to.equal('255.255.224.0');
+    expect(convertToSubnet(27)).to.equal('255.255.255.224');
+  })
+})
+
+describe('test wildcard mask', () => {
+  it('should show wildcard mask', () => {
+    expect(convertToWildcard(5)).to.equal('7.255.255.255');
+    expect(convertToWildcard(9)).to.equal('0.127.255.255');
+    expect(convertToWildcard(12)).to.equal('0.15.255.255');
+    expect(convertToWildcard(19)).to.equal('0.0.31.255');
+    expect(convertToWildcard(27)).to.equal('0.0.0.31');
+  })
+})
+
+describe('test binary subnet mask', () => {
+  it('should show binary subnet mask', () => {
+    expect(convertToBinarySubnet(5)).to.equal('11111000.00000000.00000000.00000000');
+    expect(convertToBinarySubnet(12)).to.equal('11111111.11110000.00000000.00000000');
+    expect(convertToBinarySubnet(19)).to.equal('11111111.11111111.11100000.00000000');
+    expect(convertToBinarySubnet(23)).to.equal('11111111.11111111.11111110.00000000');
+    expect(convertToBinarySubnet(28)).to.equal('11111111.11111111.11111111.11110000');
   })
 })

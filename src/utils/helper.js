@@ -9,6 +9,29 @@ export const convertToSubnet = (a) => {
     return subnet.join('.');
 }
 
+export const convertToWildcard = (a) => {
+    const subnet = [0, 0, 0, 0].map(() => {
+        const sub = '00000000'.split('').map((zero) => {
+            a -= 1;
+            return a >= 0 ? '0' : '1';
+        })
+        return parseInt(sub.join(''), 2);
+    })
+    return subnet.join('.');
+}
+
+export const convertToBinarySubnet = (a) => {
+    const subnet = [0, 0, 0, 0].map(() => {
+        const sub = '00000000'.split('').map((zero) => {
+            a -= 1;
+            return a >= 0 ? '1' : '0';
+        })
+        return sub.join('');
+    })
+    console.log(subnet.join('.'))
+    return subnet.join('.');
+}
+
 export const networkClassSplit = (type) => {
     const typeDict = {
         any: 1,
@@ -71,13 +94,15 @@ export const ipToUsableAddressRange = (ip, mask) => {
     })
     .join('')
 
-    console.log(convertBinaryToSubnet(firstIp) + ' - ' + convertBinaryToSubnet(lastIp))
     return convertBinaryToSubnet(firstIp) + ' - ' + convertBinaryToSubnet(lastIp)
 }
 
 export const subnumToTotalNumberOfHosts = (sub) => {
-    console.log(Math.pow(2, 32-sub));
     return Math.pow(2, 32 - sub);
+}
+
+export const subnumToUsableHosts = (sub) => {
+    return subnumToTotalNumberOfHosts(sub) - 2;
 }
 
 const decimalIpToBinary = ip =>
