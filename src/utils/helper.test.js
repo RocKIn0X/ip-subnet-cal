@@ -11,7 +11,8 @@ import { plus,
         convertToWildcard, 
         convertToBinarySubnet,
         ipClass, 
-        cidr, } from './helper';
+        cidr, 
+        checkIpType, } from './helper';
 
 describe('test plus', () => {
   it('should plus number', () => {
@@ -151,5 +152,16 @@ describe('test CIDR notation', () => {
     expect(cidr(24)).to.equal('/24');
     expect(cidr(28)).to.equal('/28');
     expect(cidr(32)).to.equal('/32');
+  })
+})
+
+describe('test IP type', () => {
+  it('should show IP type', () => {
+    expect(checkIpType('10.0.0.0')).to.equal('Private');
+    expect(checkIpType('10.243.12.45')).to.equal('Private');
+    expect(checkIpType('0.1.0.2')).to.equal('Public');
+    expect(checkIpType('172.31.255.255')).to.equal('Private');
+    expect(checkIpType('192.168.3.4')).to.equal('Private');
+    expect(checkIpType('190.255.255.255')).to.equal('Public');
   })
 })

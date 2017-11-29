@@ -121,6 +121,23 @@ export const subnumToUsableHosts = (sub) => {
     return subnumToTotalNumberOfHosts(sub) - 2;
 }
 
+export const checkIpType = (ip) => {
+    const check = ip.split('.')
+    if (check[0] === '10') {
+        // console.log('Private')
+        return 'Private'
+    } else if (check[0] === '172' && (16 <= check[1] && check[1] <= 31)) {
+        // console.log('Private')
+        return 'Private'
+    } else if (check[0] === '192' && check[1] === '168') {
+        // console.log('Private')
+        return 'Private'
+    } else {
+        // console.log('Public')
+        return 'Public'
+    }
+}
+
 const decimalIpToBinary = ip =>
     ip.split('.')
     .map(ipChar => '0'.repeat(8 - (+ipChar).toString(2).length) + (+ipChar).toString(2))
