@@ -41,6 +41,40 @@ export const ipToNetworkAddress = (ip, mask) => {
     return convertBinaryToSubnet(binaryIp)
 }
 
+export const ipToBroadcastAddress = (ip, mask) => {
+    const binaryIp = decimalIpToBinary(ip)
+    .split('')
+    .map((s, index) => {
+        mask -= 1;
+        return mask >= 0 && s === '0' ? '0' : '1'
+    })
+    .join('')
+
+    return convertBinaryToSubnet(binaryIp)
+}
+
+export const ipToUsableAddressRange = (ip, mask) => {
+    let maskTemp = mask
+    const firstIp = decimalIpToBinary(ip)
+    .split('')
+    .map((s, index) => {
+        mask -= 1;
+        return mask >= 0 && s === '1' || index === 31 ? '1' : '0'
+    })
+    .join('')
+    
+    const lastIp = decimalIpToBinary(ip)
+    .split('')
+    .map((s, index) => {
+        maskTemp -= 1;
+        return maskTemp >= 0 && s === '0' || index === 31 ? '0' : '1'
+    })
+    .join('')
+
+    console.log(convertBinaryToSubnet(firstIp) + ' - ' + convertBinaryToSubnet(lastIp))
+    return convertBinaryToSubnet(firstIp) + ' - ' + convertBinaryToSubnet(lastIp)
+}
+
 const decimalIpToBinary = ip =>
     ip.split('.')
     .map(ipChar => '0'.repeat(8 - (+ipChar).toString(2).length) + (+ipChar).toString(2))

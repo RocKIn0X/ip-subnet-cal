@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { plus, convertToSubnet, convertBinaryToSubnet, networkClassSplit, ipToNetworkAddress } from './helper';
+import { plus, convertToSubnet, convertBinaryToSubnet, ipToBroadcastAddress, ipToUsableAddressRange, networkClassSplit, ipToNetworkAddress } from './helper';
 
 describe('test plus', () => {
   it('should plus number', () => {
@@ -52,5 +52,15 @@ describe('test ip to broadcast address', () => {
     expect(ipToBroadcastAddress('129.2.45.100', 20)).to.equal('129.2.47.255');
     expect(ipToBroadcastAddress('129.2.45.100', 15)).to.equal('129.3.255.255');
     expect(ipToBroadcastAddress('233.1.3.2', 12)).to.equal('233.15.255.255');
+  })
+})
+
+describe('test ip to usable ip range', () => {
+  it('should show usable ip range', () => {
+    expect(ipToUsableAddressRange('233.1.5.2', 20)).to.equal('233.1.0.1 - 233.1.15.254');
+    expect(ipToUsableAddressRange('17.250.4.3', 13)).to.equal('17.248.0.1 - 17.255.255.254');
+    expect(ipToUsableAddressRange('158.0.2.4', 4)).to.equal('144.0.0.1 - 159.255.255.254');
+    expect(ipToUsableAddressRange('192.0.0.0', 28)).to.equal('192.0.0.1 - 192.0.0.14');
+    expect(ipToUsableAddressRange('233.200.45.108', 16)).to.equal('233.200.0.1 - 233.200.255.254');
   })
 })
