@@ -1,5 +1,17 @@
 import { expect } from 'chai';
-import { plus, convertToSubnet, convertBinaryToSubnet, ipToBroadcastAddress, ipToUsableAddressRange, networkClassSplit, ipToNetworkAddress, subnumToTotalNumberOfHosts, subnumToUsableHosts, convertToWildcard, convertToBinarySubnet } from './helper';
+import { plus, 
+        convertToSubnet, 
+        convertBinaryToSubnet, 
+        ipToBroadcastAddress, 
+        ipToUsableAddressRange, 
+        networkClassSplit, 
+        ipToNetworkAddress, 
+        subnumToTotalNumberOfHosts, 
+        subnumToUsableHosts, 
+        convertToWildcard, 
+        convertToBinarySubnet,
+        ipClass, 
+        cidr, } from './helper';
 
 describe('test plus', () => {
   it('should plus number', () => {
@@ -111,5 +123,33 @@ describe('test binary subnet mask', () => {
     expect(convertToBinarySubnet(19)).to.equal('11111111.11111111.11100000.00000000');
     expect(convertToBinarySubnet(23)).to.equal('11111111.11111111.11111110.00000000');
     expect(convertToBinarySubnet(28)).to.equal('11111111.11111111.11111111.11110000');
+  })
+})
+
+describe('test IP class', () => {
+  it('should show IP class', () => {
+    expect(ipClass(5)).to.equal('None');
+    expect(ipClass(7)).to.equal('None');
+    expect(ipClass(8)).to.equal('A');
+    expect(ipClass(15)).to.equal('A');
+    expect(ipClass(16)).to.equal('B');
+    expect(ipClass(23)).to.equal('B');
+    expect(ipClass(24)).to.equal('C');
+    expect(ipClass(28)).to.equal('C');
+    expect(ipClass(32)).to.equal('C');
+  })
+})
+
+describe('test CIDR notation', () => {
+  it('should show CIDR notation', () => {
+    expect(cidr(5)).to.equal('/5');
+    expect(cidr(7)).to.equal('/7');
+    expect(cidr(8)).to.equal('/8');
+    expect(cidr(15)).to.equal('/15');
+    expect(cidr(16)).to.equal('/16');
+    expect(cidr(23)).to.equal('/23');
+    expect(cidr(24)).to.equal('/24');
+    expect(cidr(28)).to.equal('/28');
+    expect(cidr(32)).to.equal('/32');
   })
 })

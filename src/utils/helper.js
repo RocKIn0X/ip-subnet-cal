@@ -32,6 +32,22 @@ export const convertToBinarySubnet = (a) => {
     return subnet.join('.');
 }
 
+export const ipClass = (a) => {
+    if (a < 8) {
+        return 'None'
+    } else if (a < 16) {
+        return 'A'
+    } else if (a < 24) {
+        return 'B'
+    } else {
+        return 'C'
+    }
+}
+
+export const cidr = (a) => {
+    return '/' + a  
+}
+
 export const networkClassSplit = (type) => {
     const typeDict = {
         any: 1,
