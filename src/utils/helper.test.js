@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { plus, convertToSubnet, convertBinaryToSubnet, ipToBroadcastAddress, ipToUsableAddressRange, networkClassSplit, ipToNetworkAddress } from './helper';
+import { plus, convertToSubnet, convertBinaryToSubnet, ipToBroadcastAddress, ipToUsableAddressRange, networkClassSplit, ipToNetworkAddress, subnumToTotalNumberOfHosts } from './helper';
 
 describe('test plus', () => {
   it('should plus number', () => {
@@ -62,5 +62,15 @@ describe('test ip to usable ip range', () => {
     expect(ipToUsableAddressRange('158.0.2.4', 4)).to.equal('144.0.0.1 - 159.255.255.254');
     expect(ipToUsableAddressRange('192.0.0.0', 28)).to.equal('192.0.0.1 - 192.0.0.14');
     expect(ipToUsableAddressRange('233.200.45.108', 16)).to.equal('233.200.0.1 - 233.200.255.254');
+  })
+})
+
+describe('test subnet number to total number of hosts', () => {
+  it('should show total number of hosts', () => {
+    expect(subnumToTotalNumberOfHosts(24)).to.equal(256);
+    expect(subnumToTotalNumberOfHosts(3)).to.equal(536870912);
+    expect(subnumToTotalNumberOfHosts(14)).to.equal(262144);
+    expect(subnumToTotalNumberOfHosts(28)).to.equal(16);
+    expect(subnumToTotalNumberOfHosts(9)).to.equal(8388608);
   })
 })

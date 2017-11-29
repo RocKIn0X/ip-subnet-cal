@@ -75,6 +75,11 @@ export const ipToUsableAddressRange = (ip, mask) => {
     return convertBinaryToSubnet(firstIp) + ' - ' + convertBinaryToSubnet(lastIp)
 }
 
+export const subnumToTotalNumberOfHosts = (sub) => {
+    console.log(Math.pow(2, 32-sub));
+    return Math.pow(2, 32 - sub);
+}
+
 const decimalIpToBinary = ip =>
     ip.split('.')
     .map(ipChar => '0'.repeat(8 - (+ipChar).toString(2).length) + (+ipChar).toString(2))
