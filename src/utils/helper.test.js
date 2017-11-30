@@ -13,7 +13,8 @@ import { plus,
         ipClass, 
         cidr, 
         checkIpType, 
-        shortIp,} from './helper';
+        shortIp, 
+        binaryId,} from './helper';
 
 describe('test plus', () => {
   it('should plus number', () => {
@@ -174,5 +175,16 @@ describe('test short IP', () => {
     expect(shortIp('192.68.35.100', 4)).to.equal('192.68.35.100/4');
     expect(shortIp('47.235.255.1', 12)).to.equal('47.235.255.1/12');
     expect(shortIp('40.125.122.13', 19)).to.equal('40.125.122.13/19');
+  })
+})
+
+describe('test binary ID', () => {
+  it('should show binary ID', () => {
+    expect(binaryId('40.125.122.13')).to.equal('101000011111010111101000001101');
+    expect(binaryId('1.0.1.0')).to.equal('1000000000000000100000000');
+    expect(binaryId('255.255.255.5')).to.equal('11111111111111111111111100000101');
+    expect(binaryId('0.0.0.5')).to.equal('101');
+    expect(binaryId('192.168.1.1')).to.equal('11000000101010000000000100000001');
+    expect(binaryId('0.0.12.2')).to.equal('110000000010');
   })
 })

@@ -142,6 +142,10 @@ export const shortIp = (ip, sub) => {
     return ip + '/' + sub;
 }
 
+export const binaryId = (ip) => {
+    return parseInt(decimalIpToBinary(ip), 2).toString(2)
+}
+
 const decimalIpToBinary = ip =>
     ip.split('.')
     .map(ipChar => '0'.repeat(8 - (+ipChar).toString(2).length) + (+ipChar).toString(2))
