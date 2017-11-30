@@ -138,6 +138,10 @@ export const checkIpType = (ip) => {
     }
 }
 
+export const shortIp = (ip, sub) => {
+    return ip + '/' + sub;
+}
+
 const decimalIpToBinary = ip =>
     ip.split('.')
     .map(ipChar => '0'.repeat(8 - (+ipChar).toString(2).length) + (+ipChar).toString(2))

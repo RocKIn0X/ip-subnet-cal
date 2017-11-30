@@ -12,7 +12,8 @@ import { plus,
         convertToBinarySubnet,
         ipClass, 
         cidr, 
-        checkIpType, } from './helper';
+        checkIpType, 
+        shortIp,} from './helper';
 
 describe('test plus', () => {
   it('should plus number', () => {
@@ -163,5 +164,15 @@ describe('test IP type', () => {
     expect(checkIpType('172.31.255.255')).to.equal('Private');
     expect(checkIpType('192.168.3.4')).to.equal('Private');
     expect(checkIpType('190.255.255.255')).to.equal('Public');
+  })
+})
+
+describe('test short IP', () => {
+  it('should show short', () => {
+    expect(shortIp('0.1.1.1', 27)).to.equal('0.1.1.1/27');
+    expect(shortIp('10.1.1.1', 18)).to.equal('10.1.1.1/18');
+    expect(shortIp('192.68.35.100', 4)).to.equal('192.68.35.100/4');
+    expect(shortIp('47.235.255.1', 12)).to.equal('47.235.255.1/12');
+    expect(shortIp('40.125.122.13', 19)).to.equal('40.125.122.13/19');
   })
 })
