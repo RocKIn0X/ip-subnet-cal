@@ -146,6 +146,14 @@ export const binaryId = (ip) => {
     return parseInt(decimalIpToBinary(ip), 2).toString(2)
 }
 
+export const decimalId = (ip) => {
+    return parseInt(decimalIpToBinary(ip), 2).toString(10)
+}
+
+export const hexId = (ip) => {
+    return parseInt(decimalIpToBinary(ip), 2).toString(16)
+}
+
 const decimalIpToBinary = ip =>
     ip.split('.')
     .map(ipChar => '0'.repeat(8 - (+ipChar).toString(2).length) + (+ipChar).toString(2))

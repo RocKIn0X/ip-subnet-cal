@@ -14,7 +14,9 @@ import { plus,
         cidr, 
         checkIpType, 
         shortIp, 
-        binaryId,} from './helper';
+        binaryId, 
+        decimalId, 
+        hexId, } from './helper';
 
 describe('test plus', () => {
   it('should plus number', () => {
@@ -186,5 +188,27 @@ describe('test binary ID', () => {
     expect(binaryId('0.0.0.5')).to.equal('101');
     expect(binaryId('192.168.1.1')).to.equal('11000000101010000000000100000001');
     expect(binaryId('0.0.12.2')).to.equal('110000000010');
+  })
+})
+
+describe('test decimal ID', () => {
+  it('should show decimal ID', () => {
+    expect(decimalId('40.125.122.13')).to.equal('679311885');
+    expect(decimalId('1.0.1.0')).to.equal('16777472');
+    expect(decimalId('255.255.255.5')).to.equal('4294967045');
+    expect(decimalId('0.0.0.5')).to.equal('5');
+    expect(decimalId('192.168.1.1')).to.equal('3232235777');
+    expect(decimalId('0.0.12.1')).to.equal('3073');
+  })
+})
+
+describe('test hex ID', () => {
+  it('should show hex ID', () => {
+    expect(hexId('40.125.122.13')).to.equal('287d7a0d');
+    expect(hexId('1.0.1.0')).to.equal('1000100');
+    expect(hexId('255.255.255.5')).to.equal('ffffff05');
+    expect(hexId('0.0.0.5')).to.equal('5');
+    expect(hexId('192.168.1.1')).to.equal('c0a80101');
+    expect(hexId('0.0.12.1')).to.equal('c01');
   })
 })
