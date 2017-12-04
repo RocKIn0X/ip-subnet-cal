@@ -21,7 +21,7 @@ import { plus,
 class App extends Component {
   state = {
     networkClass: 'any',
-    subnetMask: networkClassSplit('any'),
+    subnetSplit: networkClassSplit('any'),
     subnet: networkClassSplit('any')[0],
     ip: '158.1.1.1',
     check: false,
@@ -31,7 +31,7 @@ class App extends Component {
     console.log(networkClassSplit(e.target.value));
     this.setState({
       networkClass: e.target.value,
-      subnetMask: networkClassSplit(e.target.value)
+      subnetSplit: networkClassSplit(e.target.value)
     });
   }
 
@@ -49,9 +49,26 @@ class App extends Component {
     });
   }
 
-  clickHandle = e => {
+  clickHandler = e => {
+    let mask = this.state.subnet.split(' / ')[1]
+
     this.setState({
       check: true,
+      networkAddress: ipToNetworkAddress(this.state.ip, mask),
+      usableHostRange:ipToUsableAddressRange(this.state.ip, mask),
+      broadcastAddress: ipToBroadcastAddress(this.state.ip, mask),
+      totalHosts: subnumToTotalNumberOfHosts(mask),
+      usableHosts: subnumToUsableHosts(mask),
+      subnetMask: convertToSubnet(mask),
+      wildcardMask: convertToWildcard(mask),
+      binarySubnetMask: convertToBinarySubnet(mask),
+      ipClass: ipClass(mask),
+      cidr: cidr(mask),
+      ipType: checkIpType(this.state.ip),
+      short: shortIp(this.state.ip, mask),
+      binaryId: binaryId(this.state.ip),
+      decimalId: decimalId(this.state.ip),
+      hexId: hexId(this.state.ip),
     })
   }
 
@@ -85,7 +102,7 @@ class App extends Component {
               <div className="subnet-dropdown">
                 <select class="custom-select" onChange={this.subnetSelect}>
                 {
-                  this.state.subnetMask.map((element) =>
+                  this.state.subnetSplit.map((element) =>
                     <option value={element}>
                       {element}
                     </option>
@@ -96,10 +113,10 @@ class App extends Component {
               <div className="input-ip">
                 <div class="input-group">
                   <input type="text" class="form-control" placeholder="Please write ip address" onChange={this.ipChange} value={this.state.ip}  />
-                  <button class="btn btn-primary" type="submit" onClick={this.clickHandle}>Submit</button>
+                  <button class="btn btn-primary" type="submit" onClick={this.clickHandler}>Submit</button>
                 </div>
                 {
-                  this.state.check && <h1>HELLO</h1>
+                  this.state.check && <h1>{this.state.usableHostRange}</h1>
                 }
               </div>
             </div>
