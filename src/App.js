@@ -59,19 +59,19 @@ class App extends Component {
             <div className="text-center">
               <div className="radio-group">
                 <label>
-                  <input type="radio" value="any" name="netClass" onChange={this.radioChange} />
+                  <input checked={this.state.networkClass === 'any'} type="radio" value="any" name="netClass" onChange={this.radioChange} />
                   Any
                 </label>
                 <label>
-                  <input type="radio" value="a" name="netClass" onChange={this.radioChange} />
+                  <input checked={this.state.networkClass === 'a'} type="radio" value="a" name="netClass" onChange={this.radioChange} />
                   A
                 </label>
                 <label>
-                  <input type="radio" value="b" name="netClass" onChange={this.radioChange} />
+                  <input checked={this.state.networkClass === 'b'} type="radio" value="b" name="netClass" onChange={this.radioChange} />
                   B
                 </label>
                 <label>
-                  <input type="radio" value="c" name="netClass" onChange={this.radioChange} />
+                  <input checked={this.state.networkClass === 'c'} type="radio" value="c" name="netClass" onChange={this.radioChange} />
                   C
                 </label>
                 <div className="subnet-dropdown">
