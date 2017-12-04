@@ -24,6 +24,7 @@ class App extends Component {
     subnetMask: networkClassSplit('any'),
     subnet: networkClassSplit('any')[0],
     ip: '158.1.1.1',
+    check: false,
   }
 
   radioChange = e => {
@@ -46,6 +47,12 @@ class App extends Component {
     this.setState({
       ip: e.target.value,
     });
+  }
+
+  clickHandle = e => {
+    this.setState({
+      check: true,
+    })
   }
 
   render() {
@@ -74,22 +81,26 @@ class App extends Component {
                   <input checked={this.state.networkClass === 'c'} type="radio" value="c" name="netClass" onChange={this.radioChange} />
                   C
                 </label>
-                <div className="subnet-dropdown">
-                  <select class="custom-select" onChange={this.subnetSelect}>
-                  {
-                    this.state.subnetMask.map((element) =>
-                      <option value={element}>
-                        {element}
-                      </option>
-                    )
-                  }
-                  </select>
+              </div>
+              <div className="subnet-dropdown">
+                <select class="custom-select" onChange={this.subnetSelect}>
+                {
+                  this.state.subnetMask.map((element) =>
+                    <option value={element}>
+                      {element}
+                    </option>
+                  )
+                }
+                </select>
+              </div>
+              <div className="input-ip">
+                <div class="input-group">
+                  <input type="text" class="form-control" placeholder="Please write ip address" onChange={this.ipChange} value={this.state.ip}  />
+                  <button class="btn btn-primary" type="submit" onClick={this.clickHandle}>Submit</button>
                 </div>
-                <div className="input-ip">
-                  <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Please write ip address" onChange={this.ipChange} value={this.state.ip}  />
-                  </div>
-                </div>
+                {
+                  this.state.check && <h1>HELLO</h1>
+                }
               </div>
             </div>
           </div>
