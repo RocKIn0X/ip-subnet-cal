@@ -118,7 +118,7 @@ export const subnumToTotalNumberOfHosts = (sub) => {
 }
 
 export const subnumToUsableHosts = (sub) => {
-    return subnumToTotalNumberOfHosts(sub) - 2;
+    return subnumToTotalNumberOfHosts(sub) - 2 > 0 ? subnumToTotalNumberOfHosts(sub) - 2 : 0;
 }
 
 export const checkIpType = (ip) => {
