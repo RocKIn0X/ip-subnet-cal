@@ -76,30 +76,30 @@ class App extends Component {
     return (
       <div className="App">
         <div className="container">
-          <div className="row">
-            <div className="page-header">
-              <h1 className="text-center">IP Subnet Calculator</h1>
+          <div className="page-header">
+            <h1 className="text-center">IP Subnet Calculator</h1>
+          </div>
+          <div className="text-center">
+            <div className="col-lg-4 col-lg-offset-4">
+              <label class="select-class">
+                <input checked={this.state.networkClass === 'any'} type="radio" value="any" name="netClass" onChange={this.radioChange} />
+                Any
+              </label>
+              <label class="select-class">
+                <input checked={this.state.networkClass === 'a'} type="radio" value="a" name="netClass" onChange={this.radioChange} />
+                A
+              </label>
+              <label class="select-class">
+                <input checked={this.state.networkClass === 'b'} type="radio" value="b" name="netClass" onChange={this.radioChange} />
+                B
+              </label>
+              <label>
+                <input checked={this.state.networkClass === 'c'} type="radio" value="c" name="netClass" onChange={this.radioChange} />
+                C
+              </label>
             </div>
-            <div className="text-center">
-              <div className="radio-group">
-                <label>
-                  <input checked={this.state.networkClass === 'any'} type="radio" value="any" name="netClass" onChange={this.radioChange} />
-                  Any
-                </label>
-                <label>
-                  <input checked={this.state.networkClass === 'a'} type="radio" value="a" name="netClass" onChange={this.radioChange} />
-                  A
-                </label>
-                <label>
-                  <input checked={this.state.networkClass === 'b'} type="radio" value="b" name="netClass" onChange={this.radioChange} />
-                  B
-                </label>
-                <label>
-                  <input checked={this.state.networkClass === 'c'} type="radio" value="c" name="netClass" onChange={this.radioChange} />
-                  C
-                </label>
-              </div>
-              <div className="subnet-dropdown">
+            <div className="col-lg-4 col-lg-offset-4">
+              <div className="select-subnet">
                 <select class="custom-select" onChange={this.subnetSelect}>
                 {
                   this.state.subnetSplit.map((element) =>
@@ -110,86 +110,88 @@ class App extends Component {
                 }
                 </select>
               </div>
-              <div className="input-ip">
-                <div class="input-group">
-                  <input type="text" class="form-control" placeholder="Please write ip address" onChange={this.ipChange} value={this.state.ip}  />
-                  <button class="btn btn-primary" type="submit" onClick={this.clickHandler}>Submit</button>
-                </div>
-                {
-                  this.state.check &&
-                  <div>
-                    <table class="table table-bordered">
-                      <tbody>
-                        <tr>
-                          <td>IP Address</td>
-                          <td>{this.state.ip}</td>
-                        </tr>
-                        <tr>
-                          <td>Network Address</td>
-                          <td>{this.state.networkAddress}</td>
-                        </tr>
-                        <tr>
-                          <td>Usable Host IP Range</td>
-                          <td>{this.state.usableHostRange}</td>
-                        </tr>
-                        <tr>
-                          <td>Broadcast Address</td>
-                          <td>{this.state.broadcastAddress}</td>
-                        </tr>
-                        <tr>
-                          <td>Total Number of Hosts</td>
-                          <td>{this.state.totalHosts}</td>
-                        </tr>
-                        <tr>
-                          <td>Number of Usable Hosts</td>
-                          <td>{this.state.usableHosts}</td>
-                        </tr>
-                        <tr>
-                          <td>Subnet Mask</td>
-                          <td>{this.state.subnetMask}</td>
-                        </tr>
-                        <tr>
-                          <td>Wildcard Mask</td>
-                          <td>{this.state.wildcardMask}</td>
-                        </tr>
-                        <tr>
-                          <td>Binary Subnet Mask</td>
-                          <td>{this.state.binarySubnetMask}</td>
-                        </tr>
-                        <tr>
-                          <td>IP Class</td>
-                          <td>{this.state.ipClass}</td>
-                        </tr>
-                        <tr>
-                          <td>CIDR Notation</td>
-                          <td>{this.state.cidr}</td>
-                        </tr>
-                        <tr>
-                          <td>IP Type</td>
-                          <td>{this.state.ipType}</td>
-                        </tr>
-                        <tr>
-                          <td>Short</td>
-                          <td>{this.state.short}</td>
-                        </tr>
-                        <tr>
-                          <td>Binary ID</td>
-                          <td>{this.state.binaryId}</td>
-                        </tr>
-                        <tr>
-                          <td>Integer ID</td>
-                          <td>{this.state.decimalId}</td>
-                        </tr>
-                        <tr>
-                          <td>Hex ID</td>
-                          <td>{this.state.hexId}</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                }
+            </div>
+            <div class="col-lg-4 col-lg-offset-4">
+              <div class="input-data">
+                <input type="text" class="form-control" placeholder="Please write ip address" onChange={this.ipChange} value={this.state.ip} />
+              </div>
+              <div class="input-data">
+                <button class="btn btn-primary" type="submit" onClick={this.clickHandler}>Submit</button>
               </div>
             </div>
+            {
+              this.state.check &&
+              <div>
+                <table class="table table-bordered">
+                  <tbody>
+                    <tr>
+                      <td>IP Address</td>
+                      <td>{this.state.ip}</td>
+                    </tr>
+                    <tr>
+                      <td>Network Address</td>
+                      <td>{this.state.networkAddress}</td>
+                    </tr>
+                    <tr>
+                      <td>Usable Host IP Range</td>
+                      <td>{this.state.usableHostRange}</td>
+                    </tr>
+                    <tr>
+                      <td>Broadcast Address</td>
+                      <td>{this.state.broadcastAddress}</td>
+                    </tr>
+                    <tr>
+                      <td>Total Number of Hosts</td>
+                      <td>{this.state.totalHosts}</td>
+                    </tr>
+                    <tr>
+                      <td>Number of Usable Hosts</td>
+                      <td>{this.state.usableHosts}</td>
+                    </tr>
+                    <tr>
+                      <td>Subnet Mask</td>
+                      <td>{this.state.subnetMask}</td>
+                    </tr>
+                    <tr>
+                      <td>Wildcard Mask</td>
+                      <td>{this.state.wildcardMask}</td>
+                    </tr>
+                    <tr>
+                      <td>Binary Subnet Mask</td>
+                      <td>{this.state.binarySubnetMask}</td>
+                    </tr>
+                    <tr>
+                      <td>IP Class</td>
+                      <td>{this.state.ipClass}</td>
+                    </tr>
+                    <tr>
+                      <td>CIDR Notation</td>
+                      <td>{this.state.cidr}</td>
+                    </tr>
+                    <tr>
+                      <td>IP Type</td>
+                      <td>{this.state.ipType}</td>
+                    </tr>
+                    <tr>
+                      <td>Short</td>
+                      <td>{this.state.short}</td>
+                    </tr>
+                    <tr>
+                      <td>Binary ID</td>
+                      <td>{this.state.binaryId}</td>
+                    </tr>
+                    <tr>
+                      <td>Integer ID</td>
+                      <td>{this.state.decimalId}</td>
+                    </tr>
+                    <tr>
+                      <td>Hex ID</td>
+                      <td>{this.state.hexId}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            }
           </div>
         </div>
       </div>

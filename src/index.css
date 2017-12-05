@@ -3,3 +3,15 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+
+.select-class {
+  margin-right: 48px;
+}
+
+.select-subnet {
+  margin-bottom: 12px;
+}
+
+.input-data {
+  margin-bottom: 12px;
+}

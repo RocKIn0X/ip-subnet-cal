@@ -99,6 +99,7 @@ describe('test number of usable hosts', () => {
     expect(subnumToUsableHosts(14)).to.equal(262142);
     expect(subnumToUsableHosts(28)).to.equal(14);
     expect(subnumToUsableHosts(9)).to.equal(8388606);
+    expect(subnumToUsableHosts(32)).to.equal(0);
   })
 })
 
